@@ -5,7 +5,8 @@
     "license": "MIT",
     "scripts": {
         "install-all": "yarn && cd frontend && yarn && cd .. && cd backend && yarn && cd ..",
-        "test-all": "yarn hardhat test && cd backend cd yarn test && cd .."
+        "test-all": "cd backend && yarn test && cd .. && yarn hardhat test",
+        "run-docker": "yarn install-all && yarn test-all && docker-compose up -d"
     },
     "devDependencies": {
         "@ethersproject/abi": "^5.4.7",

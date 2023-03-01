@@ -29,7 +29,6 @@ export const VotingResults: React.FC = () => {
         setSpinner(true);
         async function onInit() {
             const listVoting = await listVotingResults();
-            console.log('listVoting', listVoting.data);
             setVotingResults(listVoting.data);
         }
         onInit()
