@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
+import "hardhat/console.sol";
+
 contract Voting {
     address public owner;
     uint public startTimestamp;
     uint public endTimestamp;
-    bool public isOpen;
 
     event VotingStarted(uint startTime, uint endTime);
+    event VoterRegistered(address voter);
     event OptionRegistered(string name);
     event Voted(address voter, string option);
 
@@ -24,7 +26,7 @@ contract Voting {
 
     constructor() {
         owner = msg.sender;
-        isOpen = false;
+        
     }
 
     modifier onlyOwner() {
@@ -38,7 +40,9 @@ contract Voting {
     }
 
     modifier outOfVotingPeriod() {
-        require(!isOpen, "Voting has already started");
+        console.log(startTimestamp);
+        console.log( block.timestamp);
+        require(startTimestamp == 0 || startTimestamp > block.timestamp, "Voting has already started");
         _;
     }
 
@@ -47,12 +51,13 @@ contract Voting {
         require(_endTimestamp > _startTimestamp, "End time must be after start time");
         startTimestamp = _startTimestamp;
         endTimestamp = _endTimestamp;
-        isOpen = true;
         emit VotingStarted(startTimestamp, endTimestamp);
     }
 
     function registerVoter(address _voter) public onlyOwner outOfVotingPeriod {
+        require(!registeredVoters[_voter].isRegistered, "The voter has already been registered.");
         registeredVoters[_voter].isRegistered = true;
+        emit VoterRegistered(_voter);
     }
 
     function registerOption(string memory _option) public onlyOwner outOfVotingPeriod {

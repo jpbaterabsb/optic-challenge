@@ -1,12 +1,12 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const Vote = await ethers.getContractFactory("Vote");
-  const vote = await Vote.deploy();
+  const Voting = await ethers.getContractFactory("Voting");
+  const voting = await Voting.deploy();
 
-  await vote.deployed();
+  await voting.deployed();
 
-  console.log(`Vote contract was deployed succesfully`);
+  console.log(`Vote contract was deployed succesfully ${voting.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

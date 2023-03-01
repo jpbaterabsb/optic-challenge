@@ -58,15 +58,21 @@ describe("Voting", function () {
       expect(voterData.isRegistered).to.equal(true);
     });
 
+    it("shouldn't allow owner the same voter 2 times", async function () {
+      await contract.registerVoter(await voter.getAddress());
+      const voterData = await contract.registeredVoters(await voter.getAddress());
+      expect(voterData.isRegistered).to.equal(true);
+      await expect(contract.registerVoter(await voter.getAddress())).to.be.revertedWith("The voter has already been registered.");
+    });
+
     it("should prevent non-owner from registering voters", async function () {
       await expect(contract.connect(voter).registerVoter(await voter.getAddress())).to.be.revertedWith("Only owner can perform this action");
     });
 
     it("should prevent registering voters during voting period", async function () {
       const currentBlockTime = (await ethers.provider.getBlock("latest")).timestamp;
-      const startTimestamp = currentBlockTime + 1000;
-      const endTimestamp = currentBlockTime + 2000;
-
+      const startTimestamp = currentBlockTime + 2;
+      const endTimestamp = currentBlockTime + 6000;
       await contract.openVoting(startTimestamp, endTimestamp);
 
       await expect(contract.registerVoter(await voter.getAddress())).to.be.revertedWith("Voting has already started");
@@ -94,7 +100,7 @@ describe("Voting", function () {
     it("should prevent registering options during voting period", async function () {
       const optionName = "Option 1";
       const currentBlockTime = (await ethers.provider.getBlock("latest")).timestamp;
-      const startTimestamp = currentBlockTime + 1000;
+      const startTimestamp = currentBlockTime + 2;
       const endTimestamp = currentBlockTime + 2000;
 
       await contract.openVoting(startTimestamp, endTimestamp);
