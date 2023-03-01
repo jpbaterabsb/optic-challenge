@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-import "hardhat/console.sol";
-
 contract Voting {
     address public owner;
     uint public startTimestamp;
@@ -40,8 +38,6 @@ contract Voting {
     }
 
     modifier outOfVotingPeriod() {
-        console.log(startTimestamp);
-        console.log( block.timestamp);
         require(startTimestamp == 0 || startTimestamp > block.timestamp, "Voting has already started");
         _;
     }

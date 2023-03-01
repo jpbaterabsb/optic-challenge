@@ -67,8 +67,6 @@ export const StartVoting: React.FC = () => {
     }
 
     function isBefore(start: Date): ValidateResult {
-        console.log(new Date());
-        console.log(new Date(start))
         if (new Date().getTime() > new Date(start).getTime()) {
             return "date should be greater than now"
         }

@@ -4,7 +4,8 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "install-all": "yarn && cd frontend && yarn && cd .. && cd backend && yarn && cd .."
+        "install-all": "yarn && cd frontend && yarn && cd .. && cd backend && yarn && cd ..",
+        "test-all": "yarn hardhat test && cd backend cd yarn test && cd .."
     },
     "devDependencies": {
         "@ethersproject/abi": "^5.4.7",
