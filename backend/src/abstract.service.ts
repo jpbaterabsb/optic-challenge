@@ -12,7 +12,7 @@ export abstract class AbstractService {
   public getVotingContract() {
     const wallet = this.ethersSigner.createWallet(process.env.OWNER_PK);
     const votingContract = this.ethersContract.create(
-      process.env.VOTER_CONTRACT,
+      process.env.VOTING_ADDRESS,
       abi,
       wallet,
     );

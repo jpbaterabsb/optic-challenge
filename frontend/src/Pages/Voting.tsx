@@ -32,17 +32,21 @@ export const Voting: React.FC = () => {
         const hours = Math.floor(periodInSeconds / 3600);
         const minutes = Math.floor((periodInSeconds - hours * 3600) / 60);
         const seconds = periodInSeconds - hours * 3600 - minutes * 60;
+
+        if(hours+minutes+seconds === 0) {
+            navigate('/voting-results');
+        }
           setTime(`${hours}:${minutes}:${seconds}`);
         }
       }, 1000);
     }
 
     return () => clearInterval(intervalId);
-  }, [votingPeriod, setTime]);
+  }, [votingPeriod, setTime, navigate]);
 
     useEffect(() => {
         async function getVote() {
-            const vote = await getVoteData(account);
+            const vote = await getVoteData();
 
             if (vote.hasVoted) {
                 setVote(vote);
@@ -50,7 +54,7 @@ export const Voting: React.FC = () => {
         }
 
         getVote();
-    }, [account, setVote]);
+    }, [setVote]);
 
     useEffect(() => {
         if (!votingPeriod.startTimestamp || votingPeriod.startTimestamp > new Date()) {

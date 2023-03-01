@@ -14,9 +14,12 @@ export async function listVotingResults() {
     return rest.get('/voting-results');
 }
 
-export async function getVoteData(account: string) {
+export async function getVoteData() {
+    const provider = await getProviders();
+    const signer = await provider.getSigner();
+    const address = await signer.getAddress();
     const contract = await getVotingContract();
-    return await contract.registeredVoters(account);
+    return await contract.registeredVoters(address);
 }
 
 

@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
+    "scripts": {
+        "install-all": "yarn && cd frontend && yarn && cd .. && cd backend && yarn && cd .."
+    },
     "devDependencies": {
         "@ethersproject/abi": "^5.4.7",
         "@ethersproject/providers": "^5.4.7",
@@ -24,15 +27,5 @@
         "ts-node": ">=8.0.0",
         "typechain": "^8.1.0",
         "typescript": ">=4.5.0"
-    },
-    "dependencies": {
-        "@chakra-ui/react": "^2.5.1",
-        "@emotion/react": "^11.10.6",
-        "@emotion/styled": "^11.10.6",
-        "framer-motion": "^9.1.6",
-        "localforage": "^1.10.0",
-        "match-sorter": "^6.3.1",
-        "react-router-dom": "^6.8.1",
-        "sort-by": "^1.2.0"
     }
 }

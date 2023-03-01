@@ -6,7 +6,7 @@ const config: HardhatUserConfig = {
   networks: {
     goerli: {
       url: `https://goerli.infura.io/v3/07d6c283a1084fa6a2c870990d73f7f5`,
-      accounts: ['151e1c9548ebed70e3d4189bf9d7ece0ed28b35341d87f914ab25cef07a7bbb4']
+      accounts: ['869d66d3ddb5ea3cfab803480146ba2c3c01731460ddd24e7154f01fabe3ef8e']
     }
   }
 
