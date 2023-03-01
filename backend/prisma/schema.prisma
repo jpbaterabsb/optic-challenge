@@ -14,7 +14,6 @@ model Voter {
   address String @id
   dateOfBirth DateTime
   email String
-  error String?
   txHash String?
 }
 

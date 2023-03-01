@@ -9,7 +9,7 @@ export abstract class AbstractService {
     protected readonly ethersSigner: EthersSigner,
   ) {}
 
-  protected getVotingContract() {
+  public getVotingContract() {
     const wallet = this.ethersSigner.createWallet(process.env.OWNER_PK);
     const votingContract = this.ethersContract.create(
       process.env.VOTER_CONTRACT,

@@ -8,6 +8,7 @@ import {
 } from 'nestjs-ethers';
 import { AbstractService } from 'src/abstract.service';
 import { PrismaService } from 'src/prisma.service';
+import { VotingResultResponse } from './voting-result.response';
 
 @Injectable()
 export class VotingResultService extends AbstractService {
@@ -31,7 +32,7 @@ export class VotingResultService extends AbstractService {
     });
   }
 
-  async listOptions() {
+  async listOptions(): Promise<VotingResultResponse[]> {
     const votingResults = await this.prisma.votingResult.findMany();
     const votingContract = this.getVotingContract();
     const reponse = await Promise.all(
